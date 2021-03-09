@@ -1,8 +1,12 @@
 
+1.0.2 (03/09/2021) :
+   - Edited Warning 3 - ScriptedUpdates must be set to no to preserve compressed cvd files within /var/lib/clamav/
+   - Corrected typo on User-Agent
+
 1.0.1 (03/08/2021) :
-   - typo correcting
-   - rewrite user-agent after discussion with joel at cisco
-   - increasing delta allowed between origin version and final version on the cdiff download process (from 100 to 2000)
+   - Typo correcting
+   - Rewrite user-agent after discussion with joel at cisco
+   - Increasing delta allowed between origin version and final version on the cdiff download process (from 100 to 2000)
 
 1.0.0 (03/07/2021)
-   - init
+   - Init

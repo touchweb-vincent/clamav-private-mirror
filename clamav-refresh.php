@@ -13,9 +13,9 @@
 # - Dig (for DNS purposes) - apt-get install dns-utils on Debian
 # - Wget
 # 
-# Version : 1.0.1
+# Version : 1.0.2
 # 
-# Changelog : https://github.com/touchweb-vincent/clamav-private-miror
+# Changelog : https://github.com/touchweb-vincent/clamav-private-mirror
 #
 #############################################################################
 #
@@ -33,7 +33,7 @@ $files_to_check = array(
     'daily.cvd',
     'bytecode.cvd'
 );
-$bin_to_check = array(
+$bins_to_check = array(
     'dig' => 'dns-utils',
     'freshclam' => 'clamav',
     'sigtool' => 'clamav',
@@ -47,7 +47,7 @@ $version_minimum = array(
     'daily.cvd' => '26100',
     'bytecode.cvd' => '332',
 );
-$version_script = '1.0.1';
+$version_script = '1.0.2';
 
 function form_27B_6()
 {
@@ -59,7 +59,7 @@ echo "\nSTARTING REFRESH CLAMAV PRIVATE MIRROR\n";
 
 echo "\nWARNING 1 : DO NOT LAUNCH THIS SCRIPT MORE THAN ONE TIME PER DAY - Bandwidth of ClamAv's infrastructure thanks you ;)";
 echo "\nWARNING 2 : MAKE SURE - YOU LAUNCH THIS SCRIPT AFTER FRESHCLAM DAILY UPDATE";
-echo "\nWARNING 3 : MAKE SURE - YOU SET CompressLocalDatabase TO yes ON YOUR FRESHCLAM CONFIGURATION FILE (/etc/clamav/freshclam.conf on Debian)";
+echo "\nWARNING 3 : MAKE SURE YOU SET CompressLocalDatabase yes AND ScriptedUpdates no ON YOUR FRESHCLAM CONFIGURATION FILE (/etc/clamav/freshclam.conf on Debian)";
 echo "\n";
 
 if (!is_dir($path_private_mirror)) {
@@ -90,7 +90,7 @@ function checkBin($bin, $paquet)
 }
 
 $check = true;
-foreach ($bin_to_check as $bin => $paquet) {
+foreach ($bins_to_check as $bin => $paquet) {
     $check = $check && checkBin($bin, $paquet);
 }
 if (!$check) {
@@ -240,7 +240,7 @@ if ($version_from_dns['check'] === 1) {
                     if (!is_file($path_private_mirror . $temp_path)) {
                         $url = $clamav_wan_database . $temp_path;
                         echo "\n          DOWNLOADING " . $url . " ...\n";
-                        passthru('cd ' . $path_private_mirror . ' && wget -U "PHP-ClamAV-Private-Miror-Refresh/' . $version_script . '" -nH -nd -N -nv ' . $url . ' 2>&1');
+                        passthru('cd ' . $path_private_mirror . ' && wget -U "PHP-ClamAV-Private-Mirror-Refresh/' . $version_script . '" -nH -nd -N -nv ' . $url . ' 2>&1');
                         if (is_file($path_private_mirror . $temp_path) && filesize($path_private_mirror . $temp_path) > 2) {
                             echo "\n          DOWNLOAD OK";
                         } else {
